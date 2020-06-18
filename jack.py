@@ -15,7 +15,18 @@ player_hand = []
 dealer_numbers = []
 player_numbers = []
 
-#finished = 0
+def shuffle():
+
+	hearts[:] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+	diamonds[:] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+	clubs[:] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+	spades[:] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+
+	dealer_hand[:] = []
+	player_hand[:] = []
+
+	dealer_numbers[:] = []
+	player_numbers[:] = []
 
 #####################################################################
 
@@ -48,10 +59,11 @@ def dealer_draw():
 	dealer_hand.append(deal)
 	return dealer_hand[0]
 
-for x in range(2):
-	deal = dealer_draw()
+def draw_for_dealer():
+	for x in range(2):
+		deal = dealer_draw()
 
-print(deal)
+	print(deal)
 
 #PLAYER'S HAND
 
@@ -82,10 +94,11 @@ def player_draw():
 	player_hand.append(play)
 	return player_hand
 
-for x in range(2):
-	play = player_draw()
+def draw_for_player():
+	for x in range(2):
+		play = player_draw()
 
-print(play)
+	print(play)
 
 #####################################################################
 
@@ -135,33 +148,73 @@ def find_winner():
 	player_total = count_player()
 
 	if player_total > 21:
-		finished = 1
-		print(finished)
 		return "Dealer:", dealer_total, "Player:", player_total, "Player is bust! Dealer wins!"
 	elif dealer_total > 21:
-		finished = 1
-		print(finished)
 		return "Dealer:", dealer_total, "Player:", player_total, "Dealer is bust! Player wins!"
 	elif dealer_total > player_total:
-		finished = 1
-		print(finished)
 		return "Dealer:", dealer_total, "Player:", player_total, "Dealer wins!"
 	else:
-		finished = 1
-		print(finished)
 		return "Dealer:", dealer_total, "Player:", player_total, "Player wins!"
 
-finished = 0
-while finished == 0:
-	print("Press h to hit. Press p to play your hand.")
-	y = input()
+#####################################################################
 
-	if y == "h":
-		print(deal)
-		hit()
-		print(player_hand)
-	elif y == "p":
-		print(find_winner())
-		break
+#GAME LOOP
 
-print("Game over")
+def loop():
+	#set condition variables
+	finished = 0
+	first_draw = 0
+	#game loop
+	while finished == 0:
+		#draw the cards
+		while first_draw == 0:
+			draw_for_dealer()
+			draw_for_player()
+			first_draw = 1
+
+		
+		#Check the deck to make sure its being restocked
+		"""
+		print(hearts)
+		print(diamonds)
+		print(spades)
+		print(clubs)
+		"""
+		
+		print("Press h to hit. Press p to play your hand.")
+		y = input()
+
+		#if players hits
+		if y == "h":
+			#show dealer's first card
+			print(dealer_hand[0])
+			#give player another card
+			hit()
+			#show players new hand
+			print(player_hand)
+		#if player plays
+		elif y == "p":
+			#find winner
+			print(find_winner())
+			#ask if player wants to play again
+			print("Play again? (y/n)")
+			y2 = input()
+			#if player says no, end game
+			if y2 == "n":
+				print("Game Over!")
+				#end loop
+				finished = 1
+			#if player says yes, shuffle deck and restart loop
+			elif y2 == "y":
+				#shuffle
+				shuffle()
+				#reset draw loop
+				first_draw = 0
+				#reset game loop
+				finished = 0
+
+#####################################################################
+
+#START THE GAME
+
+loop()
