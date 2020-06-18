@@ -12,130 +12,156 @@ spades = 	[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 dealer_hand = []
 player_hand = []
 
-#####################################################################
+dealer_numbers = []
+player_numbers = []
 
-#DEALERS HAND
-
-suitNum1 = random.randint(1,4)
-if suitNum1 == 1:
-	for dealerCard in hearts:
-		dealerCard1 = random.choice(hearts)
-		dfinal1 = dealerCard1, "hearts"
-	hearts.remove(dealerCard1)
-elif suitNum1 == 2:
-	for dealerCard in diamonds:
-		dealerCard1 = random.choice(diamonds)
-		dfinal1 = dealerCard1, "diamonds"
-	diamonds.remove(dealerCard1)
-elif suitNum1 == 3:
-	for dealerCard in clubs:
-		dealerCard1 = random.choice(clubs)
-		dfinal1 = dealerCard1, "clubs"
-	clubs.remove(dealerCard1)
-elif suitNum1 == 4:
-	for dealerCard in spades:
-		dealerCard1 = random.choice(spades)
-		dfinal1 = dealerCard1, "spades"
-	spades.remove(dealerCard1)
-
-suitNum2 = random.randint(1,4)
-if suitNum2 == 1:
-	for dealerCard in hearts:
-		dealerCard2 = random.choice(hearts)
-		dfinal2 = dealerCard2, "hearts"
-	hearts.remove(dealerCard2)
-elif suitNum2 == 2:
-	for dealerCard in diamonds:
-		dealerCard2 = random.choice(diamonds)
-		dfinal2 = dealerCard2, "diamons"
-	diamonds.remove(dealerCard2)
-elif suitNum2 == 3:
-	for dealerCard in clubs:
-		dealerCard2 = random.choice(clubs)
-		dfinal2 = dealerCard2, "clubs"
-	clubs.remove(dealerCard2)
-elif suitNum2 == 4:
-	for dealerCard in spades:
-		dealerCard2 = random.choice(spades)
-		dfinal2 = dealerCard2, "spades"
-	spades.remove(dealerCard2)
-
-print ("DEALER'S HAND")
-print (dfinal1)
-print (dfinal2)
-
-dfinal3 = dealerCard1 + dealerCard2
+#finished = 0
 
 #####################################################################
 
-#PLAYERS HAND
+#DEALER'S HAND
 
-suitNum3 = random.randint(1,4)
-if suitNum3 == 1:
-	for playerCard in hearts:
-		playerCard1 = random.choice(hearts)
-		pfinal1 = playerCard1, "hearts"
-	hearts.remove(playerCard1)
-elif suitNum3 == 2:
-	for playerCard in diamonds:
-		playerCard1 = random.choice(diamonds)
-		pfinal1 = playerCard1, "diamonds"
-	diamonds.remove(playerCard1)
-elif suitNum3 == 3:
-	for playerCard in clubs:
-		playerCard1 = random.choice(clubs)
-		pfinal1 = playerCard1, "clubs"
-	clubs.remove(playerCard1)
-elif suitNum3 == 4:
-	for playerCard in spades:
-		playerCard1 = random.choice(spades)
-		pfinal1 = playerCard1, "spades"
-	spades.remove(playerCard1)
+def dealer_draw():
+	suitNum1 = random.randint(1,4)
+	if suitNum1 == 1:
+		for dealerCard in hearts:
+			dealerCard1 = random.choice(hearts)
+			deal = dealerCard1, "hearts"
+		hearts.remove(dealerCard1)
+	elif suitNum1 == 2:
+		for dealerCard in diamonds:
+			dealerCard1 = random.choice(diamonds)
+			deal = dealerCard1, "diamonds"
+		diamonds.remove(dealerCard1)
+	elif suitNum1 == 3:
+		for dealerCard in clubs:
+			dealerCard1 = random.choice(clubs)
+			deal = dealerCard1, "clubs"
+		clubs.remove(dealerCard1)
+	elif suitNum1 == 4:
+		for dealerCard in spades:
+			dealerCard1 = random.choice(spades)
+			deal = dealerCard1, "spades"
+		spades.remove(dealerCard1)
 
-suitNum4 = random.randint(1,4)
-if suitNum4 == 1:
-	for playerCard in hearts:
-		playerCard2 = random.choice(hearts)
-		pfinal2 = playerCard2, "hearts"
-	hearts.remove(playerCard2)
-elif suitNum4 == 2:
-	for playerCard in diamonds:
-		playerCard2 = random.choice(diamonds)
-		pfinal2 = playerCard2, "diamonds"
-	diamonds.remove(playerCard2)
-elif suitNum4 == 3:
-	for playerCard in clubs:
-		playerCard2 = random.choice(clubs)
-		pfinal2 = playerCard2, "clubs"
-	clubs.remove(playerCard2)
-elif suitNum4 == 4:
-	for playerCard in spades:
-		playerCard2 = random.choice(spades)
-		pfinal2 = playerCard2, "spades"
-	spades.remove(playerCard2)
+	dealer_numbers.append(dealerCard1)
+	dealer_hand.append(deal)
+	return dealer_hand[0]
 
-print("PLAYER'S HAND")
-print(pfinal1)
-print(pfinal2)
+for x in range(2):
+	deal = dealer_draw()
 
-pfinal3 = playerCard1 + playerCard2
+print(deal)
+
+#PLAYER'S HAND
+
+def player_draw():
+	suitNum2 = random.randint(1,4)
+	if suitNum2 == 1:
+		for playerCard in hearts:
+			playerCard1 = random.choice(hearts)
+			play = playerCard1, "hearts"
+		hearts.remove(playerCard1)
+	elif suitNum2 == 2:
+		for playerCard in diamonds:
+			playerCard1 = random.choice(diamonds)
+			play = playerCard1, "diamonds"
+		diamonds.remove(playerCard1)
+	elif suitNum2 == 3:
+		for playerCard in clubs:
+			playerCard1 = random.choice(clubs)
+			play = playerCard1, "clubs"
+		clubs.remove(playerCard1)
+	elif suitNum2 == 4:
+		for playerCard in spades:
+			playerCard1 = random.choice(spades)
+			play = playerCard1, "spades"
+		spades.remove(playerCard1)
+
+	player_numbers.append(playerCard1)
+	player_hand.append(play)
+	return player_hand
+
+for x in range(2):
+	play = player_draw()
+
+print(play)
 
 #####################################################################
 
-#check who is bust, check player first. If noone is bust, check who wins.
+#HITTING
 
-if pfinal3 > 21:
-	print("Player is bust!")
-elif dfinal3 > 21:
-	print("Dealer is bust!")
-elif dfinal3 > pfinal3:
-	print("Dealer is highest! Dealer wins!")
-elif dfinal3 == pfinal3:
-	print("Draw. Dealer wins!")
-else:
-	print("Player is highest! Player wins!")
+def hit():
+	suitNum3 = random.randint(1,4)
+	if suitNum3 == 1:
+		for playerCard in hearts:
+			playerCard1 = random.choice(hearts)
+			play1 = playerCard1, "hearts"
+		hearts.remove(playerCard1)
+	elif suitNum3 == 2:
+		for playerCard in diamonds:
+			playerCard1 = random.choice(diamonds)
+			play1 = playerCard1, "diamonds"
+		diamonds.remove(playerCard1)
+	elif suitNum3 == 3:
+		for playerCard in clubs:
+			playerCard1 = random.choice(clubs)
+			play1 = playerCard1, "clubs"
+		clubs.remove(playerCard1)
+	elif suitNum3 == 4:
+		for playerCard in spades:
+			playerCard1 = random.choice(spades)
+			play1 = playerCard1, "spades"
+		spades.remove(playerCard1)
 
-#print(hearts)
-#print(diamonds)
-#print(clubs)
-#print(spades)
+	player_numbers.append(playerCard1)
+	player_hand.append(play1)
+	return player_hand
+
+#####################################################################
+
+#DETERMIN THE WINNER
+
+def count_dealer():
+	total = sum(dealer_numbers)
+	return total
+
+def count_player():
+	total = sum(player_numbers)
+	return total
+
+def find_winner():
+	dealer_total = count_dealer()
+	player_total = count_player()
+
+	if player_total > 21:
+		finished = 1
+		print(finished)
+		return "Dealer:", dealer_total, "Player:", player_total, "Player is bust! Dealer wins!"
+	elif dealer_total > 21:
+		finished = 1
+		print(finished)
+		return "Dealer:", dealer_total, "Player:", player_total, "Dealer is bust! Player wins!"
+	elif dealer_total > player_total:
+		finished = 1
+		print(finished)
+		return "Dealer:", dealer_total, "Player:", player_total, "Dealer wins!"
+	else:
+		finished = 1
+		print(finished)
+		return "Dealer:", dealer_total, "Player:", player_total, "Player wins!"
+
+finished = 0
+while finished == 0:
+	print("Press h to hit. Press p to play your hand.")
+	y = input()
+
+	if y == "h":
+		print(deal)
+		hit()
+		print(player_hand)
+	elif y == "p":
+		print(find_winner())
+		break
+
+print("Game over")
